@@ -1,0 +1,97 @@
+import type { Task } from '../types/task';
+import { daysFromToday } from '../utils/date';
+import { createIdGenerator } from '../utils/idGenerator';
+
+const nextTaskId = createIdGenerator('task');
+
+export const seedTasks: Task[] = [
+  {
+    id: nextTaskId(),
+    title: 'Set up project repository',
+    description: 'Create the repo, branch rules and README.',
+    status: 'done',
+    priority: 'medium',
+    assigneeId: 'member-1',
+    dueDate: daysFromToday(-10),
+  },
+  {
+    id: nextTaskId(),
+    title: 'Design login screen',
+    description: 'Wireframe and final design for login and register.',
+    status: 'done',
+    priority: 'medium',
+    assigneeId: 'member-4',
+    dueDate: daysFromToday(-6),
+  },
+  {
+    id: nextTaskId(),
+    title: 'Write API contract for tasks',
+    description: 'Define request and response shapes for task endpoints.',
+    status: 'done',
+    priority: 'high',
+    assigneeId: 'member-2',
+    dueDate: daysFromToday(-3),
+  },
+  {
+    id: nextTaskId(),
+    title: 'Build task card component',
+    description: 'Reusable card showing title, priority and assignee.',
+    status: 'in-progress',
+    priority: 'high',
+    assigneeId: 'member-1',
+    dueDate: daysFromToday(-2),
+  },
+  {
+    id: nextTaskId(),
+    title: 'Fix date bug in reports',
+    status: 'todo',
+    priority: 'high',
+    assigneeId: 'member-2',
+    dueDate: daysFromToday(-5),
+  },
+  {
+    id: nextTaskId(),
+    title: 'Write test cases for login',
+    description: 'Cover valid login, wrong password and empty fields.',
+    status: 'todo',
+    priority: 'medium',
+    assigneeId: 'member-3',
+    dueDate: daysFromToday(-1),
+  },
+  {
+    id: nextTaskId(),
+    title: 'Research Kanban drag and drop',
+    description: 'Compare native drag events with a small library.',
+    status: 'in-progress',
+    priority: 'medium',
+    assigneeId: 'member-1',
+    dueDate: daysFromToday(2),
+  },
+  {
+    id: nextTaskId(),
+    title: 'Prepare sprint demo',
+    description: 'Slides and a short live demo for the team.',
+    status: 'todo',
+    priority: 'medium',
+    assigneeId: null,
+    dueDate: daysFromToday(0),
+  },
+  {
+    id: nextTaskId(),
+    title: 'Update style guide',
+    description: 'Document colours, spacing and typography.',
+    status: 'todo',
+    priority: 'low',
+    assigneeId: 'member-4',
+    dueDate: null,
+  },
+  {
+    id: nextTaskId(),
+    title: 'Review pull requests',
+    description: 'Review open PRs before the demo.',
+    status: 'done',
+    priority: 'low',
+    assigneeId: 'member-2',
+    dueDate: daysFromToday(0),
+  },
+];
