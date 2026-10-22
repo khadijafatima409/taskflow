@@ -10,5 +10,3 @@ export interface Task {
   assigneeId: string | null;
   dueDate: string | null; // 'YYYY-MM-DD'
 }
-
-export type DatedTask = Task & { dueDate: string };

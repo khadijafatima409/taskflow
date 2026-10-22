@@ -1,12 +1,9 @@
 import type { Task } from '../types/task';
 import { daysFromToday } from '../utils/date';
-import { createIdGenerator } from '../utils/idGenerator';
-
-const nextTaskId = createIdGenerator('task');
 
 export const seedTasks: Task[] = [
   {
-    id: nextTaskId(),
+    id: 'task-1',
     title: 'Set up project repository',
     description: 'Create the repo, branch rules and README.',
     status: 'done',
@@ -15,7 +12,7 @@ export const seedTasks: Task[] = [
     dueDate: daysFromToday(-10),
   },
   {
-    id: nextTaskId(),
+    id: 'task-2',
     title: 'Design login screen',
     description: 'Wireframe and final design for login and register.',
     status: 'done',
@@ -24,7 +21,7 @@ export const seedTasks: Task[] = [
     dueDate: daysFromToday(-6),
   },
   {
-    id: nextTaskId(),
+    id: 'task-3',
     title: 'Write API contract for tasks',
     description: 'Define request and response shapes for task endpoints.',
     status: 'done',
@@ -33,7 +30,7 @@ export const seedTasks: Task[] = [
     dueDate: daysFromToday(-3),
   },
   {
-    id: nextTaskId(),
+    id: 'task-4',
     title: 'Build task card component',
     description: 'Reusable card showing title, priority and assignee.',
     status: 'in-progress',
@@ -42,7 +39,7 @@ export const seedTasks: Task[] = [
     dueDate: daysFromToday(-2),
   },
   {
-    id: nextTaskId(),
+    id: 'task-5',
     title: 'Fix date bug in reports',
     status: 'todo',
     priority: 'high',
@@ -50,7 +47,7 @@ export const seedTasks: Task[] = [
     dueDate: daysFromToday(-5),
   },
   {
-    id: nextTaskId(),
+    id: 'task-6',
     title: 'Write test cases for login',
     description: 'Cover valid login, wrong password and empty fields.',
     status: 'todo',
@@ -59,7 +56,7 @@ export const seedTasks: Task[] = [
     dueDate: daysFromToday(-1),
   },
   {
-    id: nextTaskId(),
+    id: 'task-7',
     title: 'Research Kanban drag and drop',
     description: 'Compare native drag events with a small library.',
     status: 'in-progress',
@@ -68,7 +65,7 @@ export const seedTasks: Task[] = [
     dueDate: daysFromToday(2),
   },
   {
-    id: nextTaskId(),
+    id: 'task-8',
     title: 'Prepare sprint demo',
     description: 'Slides and a short live demo for the team.',
     status: 'todo',
@@ -77,7 +74,7 @@ export const seedTasks: Task[] = [
     dueDate: daysFromToday(0),
   },
   {
-    id: nextTaskId(),
+    id: 'task-9',
     title: 'Update style guide',
     description: 'Document colours, spacing and typography.',
     status: 'todo',
@@ -86,7 +83,7 @@ export const seedTasks: Task[] = [
     dueDate: null,
   },
   {
-    id: nextTaskId(),
+    id: 'task-10',
     title: 'Review pull requests',
     description: 'Review open PRs before the demo.',
     status: 'done',
