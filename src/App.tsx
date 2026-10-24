@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Layout from './components/Layout';
-import { seedTasks } from './data/seedTasks';
 
 import type { Task } from './types/task';
 import BoardPage from './components/features/board/BoardPage';
@@ -10,9 +9,14 @@ import TasksPage from './components/features/tasks/TasksPage';
 import DashboardPage from './components/features/dashboard/DashboardPage';
 
 import type { TaskData } from './utils/taskForm';
+import { loadTasks, saveTasks } from './utils/taskStorage';
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>(seedTasks);
+  const [tasks, setTasks] = useState<Task[]>(loadTasks);
+
+  useEffect(() => {
+    saveTasks(tasks);
+  }, [tasks]);
 
   function addTask(data: TaskData) {
     const newTask: Task = { id: crypto.randomUUID(), ...data };
