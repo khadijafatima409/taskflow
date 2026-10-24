@@ -18,13 +18,19 @@ function App() {
     const newTask: Task = { id: crypto.randomUUID(), ...data };
     setTasks((prev) => [newTask, ...prev]);
   }
+  function deleteTask(id: string) {
+    setTasks((prev) => prev.filter((task) => task.id !== id));
+  }
 
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<DashboardPage tasks={tasks} />} />
-          <Route path="/tasks" element={<TasksPage tasks={tasks} onAdd={addTask} />} />
+          <Route
+            path="/tasks"
+            element={<TasksPage tasks={tasks} onAdd={addTask} onDelete={deleteTask} />}
+          />
           <Route path="/board" element={<BoardPage />} />
           <Route path="/team" element={<TeamPage />} />
         </Route>

@@ -17,14 +17,20 @@ import TaskForm from './TaskForm';
 interface TasksPageProps {
   tasks: Task[];
   onAdd: (data: TaskData) => void;
+  onDelete: (id: string) => void;
 }
 
-function TasksPage({ tasks, onAdd }: TasksPageProps) {
+function TasksPage({ tasks, onAdd, onDelete }: TasksPageProps) {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   function handleAdd(data: TaskData) {
     onAdd(data);
     setIsFormOpen(false);
+  }
+  function handleDelete(task: Task) {
+    if (window.confirm(`Delete "${task.title}"?`)) {
+      onDelete(task.id);
+    }
   }
 
   return (
@@ -58,6 +64,9 @@ function TasksPage({ tasks, onAdd }: TasksPageProps) {
               <div className="flex items-center gap-2">
                 <Badge tone={priorityTones[task.priority]}>{priorityLabels[task.priority]}</Badge>
                 <Badge tone={statusTones[task.status]}>{statusLabels[task.status]}</Badge>
+                <Button variant="danger" onClick={() => handleDelete(task)}>
+                  Delete
+                </Button>
               </div>
             </li>
           ))}
