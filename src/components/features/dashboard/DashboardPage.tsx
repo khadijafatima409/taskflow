@@ -1,12 +1,11 @@
 import StatCard from '../../StatCard';
 import { seedTasks } from '../../../data/seedTasks';
 import { seedTeam } from '../../../data/seedTeam';
-import { todayKey } from '../../../utils/date';
 import { getTaskStats, isOverdue } from '../../../utils/taskStats';
 import OverdueTaskList from './OverdueTaskList';
 
 function DashboardPage() {
-  const today = todayKey();
+  const today = new Date().toISOString().slice(0, 10);
   const stats = getTaskStats(seedTasks, today);
   const overdueTasks = seedTasks.filter((task) => isOverdue(task, today));
 

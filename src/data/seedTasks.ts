@@ -1,5 +1,4 @@
 import type { Task } from '../types/task';
-import { daysFromToday } from '../utils/date';
 
 export const seedTasks: Task[] = [
   {
@@ -9,7 +8,7 @@ export const seedTasks: Task[] = [
     status: 'done',
     priority: 'medium',
     assigneeId: 'member-1',
-    dueDate: daysFromToday(-10),
+    dueDate: '2026-10-12',
   },
   {
     id: 'task-2',
@@ -18,7 +17,7 @@ export const seedTasks: Task[] = [
     status: 'done',
     priority: 'medium',
     assigneeId: 'member-4',
-    dueDate: daysFromToday(-6),
+    dueDate: '2026-10-16',
   },
   {
     id: 'task-3',
@@ -27,7 +26,7 @@ export const seedTasks: Task[] = [
     status: 'done',
     priority: 'high',
     assigneeId: 'member-2',
-    dueDate: daysFromToday(-3),
+    dueDate: '2026-10-19',
   },
   {
     id: 'task-4',
@@ -36,7 +35,7 @@ export const seedTasks: Task[] = [
     status: 'in-progress',
     priority: 'high',
     assigneeId: 'member-1',
-    dueDate: daysFromToday(-2),
+    dueDate: '2026-10-20',
   },
   {
     id: 'task-5',
@@ -44,7 +43,7 @@ export const seedTasks: Task[] = [
     status: 'todo',
     priority: 'high',
     assigneeId: 'member-2',
-    dueDate: daysFromToday(-5),
+    dueDate: '2026-10-17',
   },
   {
     id: 'task-6',
@@ -53,7 +52,7 @@ export const seedTasks: Task[] = [
     status: 'todo',
     priority: 'medium',
     assigneeId: 'member-3',
-    dueDate: daysFromToday(-1),
+    dueDate: '2026-10-21',
   },
   {
     id: 'task-7',
@@ -62,7 +61,7 @@ export const seedTasks: Task[] = [
     status: 'in-progress',
     priority: 'medium',
     assigneeId: 'member-1',
-    dueDate: daysFromToday(2),
+    dueDate: '2026-12-10',
   },
   {
     id: 'task-8',
@@ -71,7 +70,7 @@ export const seedTasks: Task[] = [
     status: 'todo',
     priority: 'medium',
     assigneeId: null,
-    dueDate: daysFromToday(0),
+    dueDate: '2026-12-15',
   },
   {
     id: 'task-9',
@@ -89,6 +88,6 @@ export const seedTasks: Task[] = [
     status: 'done',
     priority: 'low',
     assigneeId: 'member-2',
-    dueDate: daysFromToday(0),
+    dueDate: '2026-10-22',
   },
 ];
