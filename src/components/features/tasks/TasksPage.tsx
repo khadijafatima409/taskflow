@@ -17,19 +17,44 @@ import TaskForm from './TaskForm';
 interface TasksPageProps {
   tasks: Task[];
   onAdd: (data: TaskData) => void;
+  onUpdate: (id: string, data: TaskData) => void;
   onDelete: (id: string) => void;
 }
 
-function TasksPage({ tasks, onAdd, onDelete }: TasksPageProps) {
+function TasksPage({ tasks, onAdd, onUpdate, onDelete }: TasksPageProps) {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
 
-  function handleAdd(data: TaskData) {
-    onAdd(data);
+  function openNewForm() {
+    setEditingTask(null);
+    setIsFormOpen(true);
+  }
+
+  function openEditForm(task: Task) {
+    setEditingTask(task);
+    setIsFormOpen(true);
+  }
+
+  function closeForm() {
+    setEditingTask(null);
     setIsFormOpen(false);
   }
+
+  function handleSubmit(data: TaskData) {
+    if (editingTask) {
+      onUpdate(editingTask.id, data);
+    } else {
+      onAdd(data);
+    }
+    closeForm();
+  }
+
   function handleDelete(task: Task) {
     if (window.confirm(`Delete "${task.title}"?`)) {
       onDelete(task.id);
+      if (editingTask?.id === task.id) {
+        closeForm();
+      }
     }
   }
 
@@ -38,14 +63,20 @@ function TasksPage({ tasks, onAdd, onDelete }: TasksPageProps) {
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-semibold tracking-tight">Tasks</h1>
         {!isFormOpen && (
-          <Button variant="primary" onClick={() => setIsFormOpen(true)}>
+          <Button variant="primary" onClick={openNewForm}>
             New task
           </Button>
         )}
       </div>
 
       {isFormOpen && (
-        <TaskForm members={seedTeam} onSubmit={handleAdd} onCancel={() => setIsFormOpen(false)} />
+        <TaskForm
+          key={editingTask ? editingTask.id : 'new'}
+          task={editingTask}
+          members={seedTeam}
+          onSubmit={handleSubmit}
+          onCancel={closeForm}
+        />
       )}
 
       <Card>
@@ -64,6 +95,7 @@ function TasksPage({ tasks, onAdd, onDelete }: TasksPageProps) {
               <div className="flex items-center gap-2">
                 <Badge tone={priorityTones[task.priority]}>{priorityLabels[task.priority]}</Badge>
                 <Badge tone={statusTones[task.status]}>{statusLabels[task.status]}</Badge>
+                <Button onClick={() => openEditForm(task)}>Edit</Button>
                 <Button variant="danger" onClick={() => handleDelete(task)}>
                   Delete
                 </Button>

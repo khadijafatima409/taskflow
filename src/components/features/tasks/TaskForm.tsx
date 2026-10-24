@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import {
-  emptyFormValues,
+  toFormValues,
   toTaskData,
   type TaskData,
   type TaskFormValues,
 } from '../../../utils/taskForm';
 import Card from '../../Card';
 import { priorities, priorityLabels, statuses, statusLabels } from '../../../data/taskOptions';
-import type { TaskPriority, TaskStatus } from '../../../types/task';
+import type { Task, TaskPriority, TaskStatus } from '../../../types/task';
 import type { TeamMember } from '../../../types/team';
 import Button from '../../Button';
 
@@ -16,13 +16,14 @@ interface TaskFormProps {
   members: TeamMember[];
   onSubmit: (data: TaskData) => void;
   onCancel: () => void;
+  task: Task | null;
 }
 
 const inputClass =
   'mt-1 w-full rounded-md border border-line bg-white px-3 py-2 text-sm font-normal';
 
-function TaskForm({ members, onSubmit, onCancel }: TaskFormProps) {
-  const [values, setValues] = useState<TaskFormValues>(emptyFormValues);
+function TaskForm({ task, members, onSubmit, onCancel }: TaskFormProps) {
+  const [values, setValues] = useState<TaskFormValues>(toFormValues(task));
   const [error, setError] = useState('');
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -38,7 +39,7 @@ function TaskForm({ members, onSubmit, onCancel }: TaskFormProps) {
 
   return (
     <Card className="mb-6 p-4">
-      <h2 className="mb-4 text-sm font-semibold">New task</h2>
+      <h2 className="mb-4 text-sm font-semibold">{task ? 'Edit task' : 'New task'}</h2>
 
       <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
         <label className="text-sm font-medium sm:col-span-2">

@@ -22,6 +22,9 @@ function App() {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   }
 
+  function updateTask(id: string, data: TaskData) {
+    setTasks((prev) => prev.map((task) => (task.id === id ? { ...task, ...data } : task)));
+  }
   return (
     <BrowserRouter>
       <Routes>
@@ -29,7 +32,14 @@ function App() {
           <Route path="/" element={<DashboardPage tasks={tasks} />} />
           <Route
             path="/tasks"
-            element={<TasksPage tasks={tasks} onAdd={addTask} onDelete={deleteTask} />}
+            element={
+              <TasksPage
+                tasks={tasks}
+                onAdd={addTask}
+                onUpdate={updateTask}
+                onDelete={deleteTask}
+              />
+            }
           />
           <Route path="/board" element={<BoardPage />} />
           <Route path="/team" element={<TeamPage />} />

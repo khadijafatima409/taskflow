@@ -13,14 +13,28 @@ export interface TaskFormValues {
 // A task without its id (App creates the id)
 export type TaskData = Omit<Task, 'id'>;
 
-export const emptyFormValues: TaskFormValues = {
-  title: '',
-  description: '',
-  status: 'todo',
-  priority: 'medium',
-  assigneeId: '',
-  dueDate: '',
-};
+// Task → form text (null and undefined become '')
+export function toFormValues(task: Task | null): TaskFormValues {
+  if (task === null) {
+    return {
+      title: '',
+      description: '',
+      status: 'todo',
+      priority: 'medium',
+      assigneeId: '',
+      dueDate: '',
+    };
+  }
+
+  return {
+    title: task.title,
+    description: task.description ?? '',
+    status: task.status,
+    priority: task.priority,
+    assigneeId: task.assigneeId ?? '',
+    dueDate: task.dueDate ?? '',
+  };
+}
 
 // Convert form text into the Task shape
 export function toTaskData(values: TaskFormValues): TaskData {
