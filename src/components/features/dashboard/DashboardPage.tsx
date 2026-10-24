@@ -1,13 +1,17 @@
 import StatCard from '../../StatCard';
-import { seedTasks } from '../../../data/seedTasks';
 import { seedTeam } from '../../../data/seedTeam';
 import { getTaskStats, isOverdue } from '../../../utils/taskStats';
 import OverdueTaskList from './OverdueTaskList';
+import type { Task } from '../../../types/task';
 
-function DashboardPage() {
+interface DashboardPageProps {
+  tasks: Task[];
+}
+
+function DashboardPage({ tasks }: DashboardPageProps) {
   const today = new Date().toISOString().slice(0, 10);
-  const stats = getTaskStats(seedTasks, today);
-  const overdueTasks = seedTasks.filter((task) => isOverdue(task, today));
+  const stats = getTaskStats(tasks, today);
+  const overdueTasks = tasks.filter((task) => isOverdue(task, today));
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">

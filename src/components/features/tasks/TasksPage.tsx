@@ -1,4 +1,3 @@
-import { seedTasks } from '../../../data/seedTasks';
 import { seedTeam } from '../../../data/seedTeam';
 
 import {
@@ -7,18 +6,23 @@ import {
   statusLabels,
   statusTones,
 } from '../../../data/taskOptions';
+import type { Task } from '../../../types/task';
 import { getMemberName } from '../../../utils/team';
 import Badge from '../../Badge';
 import Card from '../../Card';
 
-function TasksPage() {
+interface TasksPageProps {
+  tasks: Task[];
+}
+
+function TasksPage({ tasks }: TasksPageProps) {
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <h1 className="mb-6 text-2xl font-semibold tracking-tight">Tasks</h1>
 
       <Card>
         <ul className="divide-y divide-line">
-          {seedTasks.map((task) => (
+          {tasks.map((task) => (
             <li
               key={task.id}
               className="flex flex-wrap items-center justify-between gap-3 px-4 py-3"
