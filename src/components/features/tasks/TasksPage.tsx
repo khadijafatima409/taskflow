@@ -1,5 +1,8 @@
+import { useState } from 'react';
+import Badge from '../../../components/Badge';
+import Button from '../../../components/Button';
+import Card from '../../../components/Card';
 import { seedTeam } from '../../../data/seedTeam';
-
 import {
   priorityLabels,
   priorityTones,
@@ -7,18 +10,37 @@ import {
   statusTones,
 } from '../../../data/taskOptions';
 import type { Task } from '../../../types/task';
+import type { TaskData } from '../../../utils/taskForm';
 import { getMemberName } from '../../../utils/team';
-import Badge from '../../Badge';
-import Card from '../../Card';
+import TaskForm from './TaskForm';
 
 interface TasksPageProps {
   tasks: Task[];
+  onAdd: (data: TaskData) => void;
 }
 
-function TasksPage({ tasks }: TasksPageProps) {
+function TasksPage({ tasks, onAdd }: TasksPageProps) {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
+  function handleAdd(data: TaskData) {
+    onAdd(data);
+    setIsFormOpen(false);
+  }
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-      <h1 className="mb-6 text-2xl font-semibold tracking-tight">Tasks</h1>
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-2xl font-semibold tracking-tight">Tasks</h1>
+        {!isFormOpen && (
+          <Button variant="primary" onClick={() => setIsFormOpen(true)}>
+            New task
+          </Button>
+        )}
+      </div>
+
+      {isFormOpen && (
+        <TaskForm members={seedTeam} onSubmit={handleAdd} onCancel={() => setIsFormOpen(false)} />
+      )}
 
       <Card>
         <ul className="divide-y divide-line">

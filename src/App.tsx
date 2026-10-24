@@ -9,15 +9,22 @@ import TeamPage from './components/features/team/TeamPage';
 import TasksPage from './components/features/tasks/TasksPage';
 import DashboardPage from './components/features/dashboard/DashboardPage';
 
+import type { TaskData } from './utils/taskForm';
+
 function App() {
-  const [tasks] = useState<Task[]>(seedTasks);
+  const [tasks, setTasks] = useState<Task[]>(seedTasks);
+
+  function addTask(data: TaskData) {
+    const newTask: Task = { id: crypto.randomUUID(), ...data };
+    setTasks((prev) => [newTask, ...prev]);
+  }
 
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<DashboardPage tasks={tasks} />} />
-          <Route path="/tasks" element={<TasksPage tasks={tasks} />} />
+          <Route path="/tasks" element={<TasksPage tasks={tasks} onAdd={addTask} />} />
           <Route path="/board" element={<BoardPage />} />
           <Route path="/team" element={<TeamPage />} />
         </Route>
