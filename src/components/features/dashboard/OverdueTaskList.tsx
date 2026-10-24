@@ -1,6 +1,7 @@
 import Card from '../../Card';
 import type { Task } from '../../../types/task';
 import type { TeamMember } from '../../../types/team';
+import { getMemberName } from '../../../utils/team';
 
 interface OverdueTaskListProps {
   tasks: Task[];
@@ -8,11 +9,6 @@ interface OverdueTaskListProps {
 }
 
 function OverdueTaskList({ tasks, members }: OverdueTaskListProps) {
-  function getAssigneeName(assigneeId: string | null): string {
-    const member = members.find((m) => m.id === assigneeId);
-    return member ? member.name : 'Unassigned';
-  }
-
   return (
     <Card>
       <div className="flex items-center justify-between border-b border-line px-4 py-3">
@@ -28,7 +24,9 @@ function OverdueTaskList({ tasks, members }: OverdueTaskListProps) {
             <li key={task.id} className="flex items-center justify-between gap-4 px-4 py-3">
               <div>
                 <p className="text-sm font-medium">{task.title}</p>
-                <p className="mt-0.5 text-xs text-muted">{getAssigneeName(task.assigneeId)}</p>
+                <p className="mt-0.5 text-xs text-muted">
+                  {getMemberName(members, task.assigneeId)}
+                </p>
               </div>
               <span className="text-xs font-medium text-overdue">Due {task.dueDate}</span>
             </li>
