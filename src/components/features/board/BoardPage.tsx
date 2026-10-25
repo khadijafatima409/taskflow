@@ -1,6 +1,9 @@
 import Card from '../../../components/Card';
 import { statuses, statusLabels } from '../../../data/taskOptions';
 import type { Task } from '../../../types/task';
+import { seedTeam } from '../../../data/seedTeam';
+import { getMemberName } from '../../../utils/team';
+import BoardCard from './BoardCard';
 
 interface BoardPageProps {
   tasks: Task[];
@@ -26,9 +29,11 @@ function BoardPage({ tasks }: BoardPageProps) {
 
               <ul className="space-y-2">
                 {columnTasks.map((task) => (
-                  <li key={task.id} className="rounded-md border border-line bg-canvas p-3 text-sm">
-                    {task.title}
-                  </li>
+                  <BoardCard
+                    key={task.id}
+                    task={task}
+                    assigneeName={getMemberName(seedTeam, task.assigneeId)}
+                  />
                 ))}
               </ul>
             </Card>
