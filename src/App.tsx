@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Layout from './components/Layout';
 
-import type { Task } from './types/task';
+import type { Task, TaskStatus } from './types/task';
 import BoardPage from './components/features/board/BoardPage';
 import TeamPage from './components/features/team/TeamPage';
 import TasksPage from './components/features/tasks/TasksPage';
@@ -29,6 +29,10 @@ function App() {
   function updateTask(id: string, data: TaskData) {
     setTasks((prev) => prev.map((task) => (task.id === id ? { ...task, ...data } : task)));
   }
+
+  function changeTaskStatus(id: string, status: TaskStatus) {
+    setTasks((prev) => prev.map((task) => (task.id === id ? { ...task, status } : task)));
+  }
   return (
     <BrowserRouter>
       <Routes>
@@ -45,7 +49,7 @@ function App() {
               />
             }
           />
-          <Route path="/board" element={<BoardPage />} />
+          <Route path="/board" element={<BoardPage tasks={tasks} onMove={changeTaskStatus} />} />
           <Route path="/team" element={<TeamPage />} />
         </Route>
       </Routes>
