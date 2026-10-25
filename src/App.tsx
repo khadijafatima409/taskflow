@@ -50,7 +50,7 @@ function App() {
             }
           />
           <Route path="/board" element={<BoardPage tasks={tasks} onMove={changeTaskStatus} />} />
-          <Route path="/team" element={<TeamPage />} />
+          <Route path="/team" element={<TeamPage tasks={tasks} />} />
         </Route>
       </Routes>
     </BrowserRouter>
