@@ -1,4 +1,4 @@
-import Badge from '../../../components/Badge';
+import Badge from '../../Badge';
 import { priorityLabels, priorityTones } from '../../../data/taskOptions';
 import type { Task } from '../../../types/task';
 
@@ -9,7 +9,11 @@ interface BoardCardProps {
 
 function BoardCard({ task, assigneeName }: BoardCardProps) {
   return (
-    <li className="rounded-md border border-line bg-canvas p-3">
+    <li
+      draggable
+      onDragStart={(e) => e.dataTransfer.setData('text/plain', task.id)}
+      className="cursor-grab rounded-md border border-line bg-canvas p-3 active:cursor-grabbing"
+    >
       <p className="text-sm font-medium">{task.title}</p>
       <p className="mt-1 text-xs text-muted">
         {assigneeName} · {task.dueDate ?? 'No due date'}
