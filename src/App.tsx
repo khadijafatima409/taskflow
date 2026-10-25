@@ -45,7 +45,7 @@ function App() {
               />
             }
           />
-          <Route path="/board" element={<BoardPage />} />
+          <Route path="/board" element={<BoardPage tasks={tasks} />} />
           <Route path="/team" element={<TeamPage />} />
         </Route>
       </Routes>
