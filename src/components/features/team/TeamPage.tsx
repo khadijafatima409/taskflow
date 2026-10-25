@@ -24,6 +24,7 @@ function TeamPage({ tasks }: TeamPageProps) {
       <div className="grid gap-4 sm:grid-cols-2">
         {seedTeam.map((member) => {
           const memberTasks = tasks.filter((task) => task.assigneeId === member.id);
+          const openTasks = memberTasks.filter((task) => task.status !== 'done');
 
           return (
             <Card key={member.id} className="p-4">
@@ -49,6 +50,26 @@ function TeamPage({ tasks }: TeamPageProps) {
                     </Badge>
                   );
                 })}
+              </div>
+
+              <div className="mt-4 border-t border-line pt-3">
+                <p className="mb-2 text-xs font-medium tracking-wide text-muted uppercase">
+                  Open tasks
+                </p>
+                {openTasks.length === 0 ? (
+                  <p className="text-sm text-muted">Nothing open</p>
+                ) : (
+                  <ul className="space-y-1">
+                    {openTasks.map((task) => (
+                      <li key={task.id} className="flex justify-between gap-3 text-sm">
+                        <span>{task.title}</span>
+                        <span className="shrink-0 text-xs text-muted">
+                          {task.dueDate ?? 'No due date'}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </Card>
           );
